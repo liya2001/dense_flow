@@ -10,10 +10,29 @@ Please see the [opencv-3.1](https://github.com/yjxiong/dense_flow/tree/opencv-3.
 ### Install
 ```
 git clone --recursive http://github.com/yjxiong/dense_flow
-mkdir build && cd build
-cmake .. && make -j
 ```
 
+### Build
+```markdown
+mkdir build && cd build
+# `export OpenCV_DIR=/path/to/opencv-2.4.13/release/` if necessary
+cmake -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF .. 
+make -j
+```
+##### Build problem and solution
+1. Error: cannot find -lopencv_dep_cudart  
+   [solution](https://github.com/yjxiong/temporal-segment-networks/issues/54): add -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF when build dense_flow 
+    ```markdown
+    cmake -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF ..
+    ``` 
+    
+2. Can't find right OpenCV version and path  
+    Export opencv build path(containing the OpenCVConfig.cmake file) before `make ..`
+    ```markdown
+    export OpenCV_DIR=/path/to/opencv-2.4.13/release/
+    ```
+    [reference](https://stackoverflow.com/questions/8711109/could-not-find-module-findopencv-cmake-error-in-configuration-process)
+    
 ### Usage
 ```
 ./extract_gpu -f test.avi -x tmp/flow_x -y tmp/flow_y -i tmp/image -b 20 -t 1 -d 0 -s 1 -o dir
