@@ -19,7 +19,7 @@ mkdir build && cd build
 cmake -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF .. 
 make -j
 ```
-##### Build problem and solution
+##### Build problems and solutions
 1. Error: cannot find -lopencv_dep_cudart  
    [solution](https://github.com/yjxiong/temporal-segment-networks/issues/54): add -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF when build dense_flow 
     ```markdown
@@ -32,7 +32,10 @@ make -j
     export OpenCV_DIR=/path/to/opencv-2.4.13/release/
     ```
     [reference](https://stackoverflow.com/questions/8711109/could-not-find-module-findopencv-cmake-error-in-configuration-process)
-    
+   
+3. Boost python version problem  
+    ImportError: /dense_flow/build/libpydenseflow.so: undefined symbol: _ZN5boost6python6detail11init_moduleER11PyModuleDefPFvvE   
+    [Solution](https://github.com/yjxiong/anet2016-cuhk/issues/11): Modify line 23 of CMakeLists.txt to FIND_PACKAGE(PythonLibs 2.7 REQUIRED). The default one is for Python3.5m
 ### Usage
 ```
 ./extract_gpu -f test.avi -x tmp/flow_x -y tmp/flow_y -i tmp/image -b 20 -t 1 -d 0 -s 1 -o dir

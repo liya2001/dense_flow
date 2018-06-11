@@ -91,7 +91,7 @@ if __name__ == '__main__':
     src_path = args.src_dir
     num_worker = args.num_worker
     flow_type = args.flow_type
-    run_optical_flow('/home/liya/workspace/trecvid/data/flow-test/37_VIRAT_S_000000_2088_2116.mp4', 0)
+    run_optical_flow(('/home/liya/workspace/trecvid/data/flow-test/37_VIRAT_S_000000_2088_2116.mp4', 0))
     '''
     vid_list = glob.glob(src_path+'/*.mp4')
     print(len(vid_list))
